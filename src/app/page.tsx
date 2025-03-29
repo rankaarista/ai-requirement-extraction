@@ -8,15 +8,57 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function Home() {
   const [requirement, setRequirement] = useState("");
   const [credits, setCredits] = useState(20);
+  const [extractedData, setExtractedData] = useState<any[]>([]);
 
   const handleExtract = async () => {
     if (credits <= 0) {
       alert("You've reached the limit. Please purchase more credits to continue.");
       return;
     }
-
-    
+  
+    setCredits(credits - 1);
+  
+    try {
+      const response = await fetch("/api/extract", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ requirement: requirement }),
+      });
+  
+      const data = await response.json();
+      //console.log(data); //debugging log
+  
+      if (response.ok) {
+        // Extract the structured response from Mistral API output
+        const extracted = parseResponse(data.response.choices[0].message.content);
+        setExtractedData(extracted);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error fetching extracted requirements:", error);
+      alert("Failed to extract requirements. Please try again.");
+    }
   };
+
+  const parseResponse = (responseText: string) => {
+    const lines = responseText.trim().split("\n").filter(line => line.trim() !== ""); // Remove empty lines
+    const extracted = [];
+  
+    for (const line of lines) {
+        const match = line.match(/^\d+\.\s*(.*?):\s*(.*?)$/); // Match "1. Category: Best Software"
+      
+        if (match) {
+            const category = match[1].trim();
+            const software = match[2].trim();
+            extracted.push({ category, software });
+        }
+    }
+    
+    
+    return extracted;
+};
+
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
