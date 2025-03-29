@@ -26,7 +26,7 @@ export default function Home() {
       });
   
       const data = await response.json();
-      //console.log(data); //debugging log
+      console.log(data); //debugging log
   
       if (response.ok) {
         // Extract the structured response from Mistral API output
@@ -89,6 +89,34 @@ export default function Home() {
           )}
         </CardContent>
       </Card>
+
+       {/* Extracted Data Table */}
+       {/* Extracted Data Table */}
+      {extractedData.length > 0 && (
+        <Card className="w-full max-w-2xl mt-6 p-4 shadow-md">
+          <CardContent>
+            <h2 className="text-xl font-semibold mb-3">Extracted Requirements</h2>
+            <div className="border rounded-md overflow-hidden">
+              <table className="w-full border-collapse">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="p-2 border">Category</th>
+                    <th className="p-2 border">Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {extractedData.map((item, index) => (
+                    <tr key={index} className="border">
+                      <td className="p-2 border">{item.category}</td>
+                      <td className="p-2 border">{item.software}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </main>
   );
 }
