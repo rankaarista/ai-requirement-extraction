@@ -19,7 +19,6 @@ export default function Home() {
   const [credits, setCredits] = useState(20);
   const [extractedData, setExtractedData] = useState<ExtractedData[]>([]);
   const [darkMode, setDarkMode] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
