@@ -7,7 +7,7 @@ This project is a web application that allows users to input software requiremen
 - **Frontend:** Next.js, TailwindCSS, shadcn/ui
 - **Backend:** Next.js API
 - **State Management:** React hooks
-- **AI Integration:** Mistral API (or any other LLM API)
+- **AI Integration:** Mistral 7B API (via Hugging Face)
 - **Deployment:** Vercel
 
 ## Setup & Running Instructions
