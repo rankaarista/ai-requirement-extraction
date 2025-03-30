@@ -7,9 +7,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sun, Moon } from "lucide-react";
 
 export default function Home() {
+
+  interface ExtractedData {
+    category: string;
+    software: string;
+  }
+  
+
   const [requirement, setRequirement] = useState("");
   const [credits, setCredits] = useState(20);
-  const [extractedData, setExtractedData] = useState<any[]>([]);
+  const [extractedData, setExtractedData] = useState<ExtractedData[]>([]);
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -115,7 +122,7 @@ export default function Home() {
 
           {credits <= 0 && (
             <p className="text-red-500 text-sm mt-2">
-              You've reached the limit. Please purchase more credits to continue.
+              You&apos;ve reached the limit. Please purchase more credits to continue.
             </p>
           )}
         </CardContent>
