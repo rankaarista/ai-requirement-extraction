@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sun, Moon } from "lucide-react";
+import BuyCreditsModal from "@/components/ui/BuyCreditsModal";
 
 export default function Home() {
 
@@ -18,6 +19,7 @@ export default function Home() {
   const [credits, setCredits] = useState(20);
   const [extractedData, setExtractedData] = useState<ExtractedData[]>([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
@@ -94,12 +96,16 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <Button
-        onClick={() => setDarkMode(!darkMode)}
-        className="absolute top-4 right-4 p-2 bg-gray-200 dark:bg-gray-700 rounded-full"
-      >
-        {darkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-900 dark:text-gray-100" />}
-      </Button>
+      {/* Dark Mode & Buy Credits */}
+      <div className="absolute top-4 right-4 flex gap-4">
+        <Button
+          onClick={() => setDarkMode(!darkMode)}
+          className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"
+        >
+          {darkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-gray-900 dark:text-gray-100" />}
+        </Button>
+      </div>
+
       <Card className="w-full max-w-2xl p-4 shadow-md dark:bg-gray-800">
         <CardContent>
           <h1 className="text-2xl font-bold mb-4">AI Requirement Extractor</h1>
@@ -127,6 +133,9 @@ export default function Home() {
           )}
         </CardContent>
       </Card>
+
+      {/* Add the BuyCreditsForm component */}
+      {<BuyCreditsModal credits={credits} setCredits={setCredits} />}
 
       {/* Extracted Data Table */}
       {extractedData.length > 0 && (
