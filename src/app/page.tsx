@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Sun, Moon, History, Trash2, Copy, Check } from "lucide-react";
+import { Sun, Moon, Trash2, Copy, Check } from "lucide-react";
 import BuyCreditsModal from "@/components/ui/BuyCreditsModal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
